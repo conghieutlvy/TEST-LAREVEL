@@ -1,51 +1,80 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>LOGIN</title>
-</head>
+@extends('layouts.app')
 
-<body>
-<div class="login-box">
-    <div class="login-logo">
-        <a href="admin/login"><b>tintuc</b>.com</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in</p>
- 
-        <form action="/login" method="post">
-            {{ csrf_field() }}
-            <div class="form-group has-feedback {{ $errors->has('txtUsername') ? ' has-error' : '' }}">
-                <input type="text" id="txtUsername" name="txtUsername" class="form-control" placeholder="Nhập vào username" value="{{ old('txtUsername') }}" required="" autofocus="">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('txtUsername'))
-                    <span class="help-block">
-              <strong>{{ $errors->first('txtUsername') }}</strong>
-          </span>
-                @endif
-            </div>
-            <div class="form-group has-feedback {{ $errors->has('txtPassword') ? ' has-error' : '' }}">
-                <input type="password" id="txtPassword" name="txtPassword" class="form-control" placeholder="Nhập vào password" required="">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                @if ($errors->has('txtPassword'))
-                    <span class="help-block">
-              <strong>{{ $errors->first('txtPassword') }}</strong>
-          </span>
-                @endif
-            </div>
-            <div class="row">
- 
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="username" class="col-md-4 control-label">Username</label>
+
+                            <div class="col-md-6">
+                                <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+
+                                @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label for="option" class="col-md-4 control-label">Đăng nhập với tư cách:</label>
+
+                            <div class="col-md-6">
+                                <select id="option" type="" class="form-control" name="option" value="{{ old('option') }}">
+                                	<option value="sinhvien"> Sinh viên</option>
+                    				<option value="pdt"> Phòng Đào tạo </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <!-- /.col -->
             </div>
-        </form>
+        </div>
     </div>
-    <!-- /.login-box-body -->
 </div>
-
-</body>
-</html>
+@endsection

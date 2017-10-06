@@ -15,8 +15,9 @@ class CreateTableSINHVIEN extends Migration
     {
         Schema::create('SINHVIEN', function (Blueprint $table) {
             $table->increments('id');
-			$table->integer('MA SINH VIEN');
+			$table->integer('MSV');
 			$table->string('TEN SINH VIEN');
+			$table->rememberToken();
             $table->timestamps();
         });
     }

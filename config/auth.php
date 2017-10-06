@@ -45,6 +45,14 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+		'sinhvien' => [
+            'driver' => 'session',
+            'provider' => 'sinhvien',
+        ],
+		'sinhvien-api' => [
+            'driver' => 'token',
+            'provider' => 'sinhvien',
+        ],
     ],
 
     /*
@@ -69,7 +77,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+		'sinhvien' => [
+            'driver' => 'eloquent',
+            'model' => App\sinhvien::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
